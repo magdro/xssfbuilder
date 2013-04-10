@@ -54,6 +54,7 @@ public class CellBuilderImpl implements CellBuilder {
 
 	public CellBuilder formula(String formula) {
 		cell.setCellFormula(formula);
+		cell.setCellType(XSSFCell.CELL_TYPE_FORMULA);
 		return this;
 	}
 

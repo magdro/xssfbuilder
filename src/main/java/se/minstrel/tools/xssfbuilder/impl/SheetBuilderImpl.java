@@ -52,7 +52,7 @@ public class SheetBuilderImpl implements SheetBuilder {
 	}
 
 	public ColumnBuilder col(int colNr) {
-		return new ColumnBuilderImpl(sheet, colNr);
+		return new ColumnBuilderImpl(support, sheet, colNr);
 	}
 
 	public CellBuilder cell(int rowNr, int colNr) {
@@ -89,6 +89,30 @@ public class SheetBuilderImpl implements SheetBuilder {
 
 	public SheetBuilder clearMarkers() {
 		support.getMarkerManager().unmark();
+		return this;
+	}
+
+	@Override
+	public SheetBuilder autoWidth() {
+		return autoWidth(false);
+	}
+
+	@Override
+	public SheetBuilder autoWidth(boolean evaluateFormulas) {
+		if (evaluateFormulas) {
+			support.getFormulaEvaluator().clearAllCachedResultValues();
+			support.getFormulaEvaluator().evaluateAll();
+		}
+		int lastCol = 0;
+		for (int r = 0; r <= sheet.getLastRowNum(); r++) {
+			XSSFRow row = sheet.getRow(r);
+			if (row != null) {
+				lastCol = lastCol < row.getLastCellNum() ? row.getLastCellNum() : lastCol;
+			}
+		}
+		for (int c = 0; c <= lastCol; c++) {
+			col(c).autoWidth(false);
+		}
 		return this;
 	}
 

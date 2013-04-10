@@ -22,6 +22,7 @@ package se.minstrel.tools.xssfbuilder.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -35,14 +36,20 @@ public class Support {
 	private Map<Style, XSSFCellStyle> styleMap;
 	private XSSFWorkbook workbook;
 	private XSSFDataFormat dataFormat;
-
+	private FormulaEvaluator formulaEvaluator;
+	
 	public Support(XSSFWorkbook workbook, MarkerManager markerManager) {
 		this.markerManager = markerManager;
 		this.workbook = workbook;
 		this.styleMap = new HashMap <Style, XSSFCellStyle> ();
 		this.dataFormat = workbook.createDataFormat();
+		this.formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
 	}
 
+	public FormulaEvaluator getFormulaEvaluator() {
+		return formulaEvaluator;
+	}
+	
 	public XSSFDataFormat getDataFormat() {
 		return dataFormat;
 	}

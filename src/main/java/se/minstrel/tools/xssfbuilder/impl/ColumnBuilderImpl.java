@@ -19,22 +19,37 @@
  */
 package se.minstrel.tools.xssfbuilder.impl;
 
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 import se.minstrel.tools.xssfbuilder.ColumnBuilder;
 
 public class ColumnBuilderImpl implements ColumnBuilder {
 
+	private Support support;
 	private XSSFSheet sheet;
 	private int colNr;
 	
-	public ColumnBuilderImpl(XSSFSheet sheet, int colNr) {
+	public ColumnBuilderImpl(Support support, XSSFSheet sheet, int colNr) {
 		this.sheet = sheet;
 		this.colNr = colNr;
+		this.support = support;
 	}
 
 	@Override
 	public ColumnBuilder autoWidth() {
+		return autoWidth(false);
+	}
+	
+	@Override
+	public ColumnBuilder autoWidth(boolean evaluateFormulas) {
+		if (evaluateFormulas) {
+			support.getFormulaEvaluator().clearAllCachedResultValues();
+			support.getFormulaEvaluator().evaluateAll();
+		}
+		
 		sheet.autoSizeColumn(colNr);
 		return this;
 	}

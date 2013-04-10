@@ -22,5 +22,6 @@ package se.minstrel.tools.xssfbuilder;
 public interface ColumnBuilder {
 
 	ColumnBuilder autoWidth();
+	ColumnBuilder autoWidth(boolean evaluateFormulas);
 
 }

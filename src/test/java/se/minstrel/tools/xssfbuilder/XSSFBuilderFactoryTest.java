@@ -60,6 +60,7 @@ public class XSSFBuilderFactoryTest {
 		sheet.cell(6, 1).value(new Date()).style(sheet.styleBuilder().format("yyyy-mm-dd").apply());
 		
 		sheet.col(0).autoWidth();
+		sheet.autoWidth(true);
 		
 		try {
 			write(xwb, "out.xlsx");

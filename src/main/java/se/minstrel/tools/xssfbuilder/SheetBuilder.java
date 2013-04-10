@@ -38,4 +38,7 @@ public interface SheetBuilder {
 
 	SheetBuilder clearMarkers();
 
+	SheetBuilder autoWidth();
+	SheetBuilder autoWidth(boolean evaluateFormulas);
+
 }
