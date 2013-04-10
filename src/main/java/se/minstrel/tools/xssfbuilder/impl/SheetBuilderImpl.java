@@ -52,7 +52,7 @@ public class SheetBuilderImpl implements SheetBuilder {
 	}
 
 	public ColumnBuilder col(int colNr) {
-		return new ColumnBuilderImpl(colNr);
+		return new ColumnBuilderImpl(sheet, colNr);
 	}
 
 	public CellBuilder cell(int rowNr, int colNr) {

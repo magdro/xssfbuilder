@@ -19,12 +19,24 @@
  */
 package se.minstrel.tools.xssfbuilder.impl;
 
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+
 import se.minstrel.tools.xssfbuilder.ColumnBuilder;
 
 public class ColumnBuilderImpl implements ColumnBuilder {
 
-	public ColumnBuilderImpl(int colNr) {
-		// TODO Auto-generated constructor stub
+	private XSSFSheet sheet;
+	private int colNr;
+	
+	public ColumnBuilderImpl(XSSFSheet sheet, int colNr) {
+		this.sheet = sheet;
+		this.colNr = colNr;
+	}
+
+	@Override
+	public ColumnBuilder autoWidth() {
+		sheet.autoSizeColumn(colNr);
+		return this;
 	}
 
 }
