@@ -24,6 +24,7 @@ import java.awt.Color;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
+import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -75,14 +76,21 @@ public class StyleBuilderImpl implements StyleBuilder {
 		font.setFontHeight(style.getFontSize());
 		font.setBold(style.isBold());
 		font.setItalic(style.isItalics());
-		font.setColor(new XSSFColor(style.getFgColor()));
+		if (style.getFgColor() != null) {
+			font.setColor(new XSSFColor(style.getFgColor()));
+		}
 		
 		XSSFCellStyle cs = support.getWorkbook().createCellStyle();
 		cs.setFont(font);
 		
-		cs.setFillForegroundColor(new XSSFColor(style.getBgColor()));
-		cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		if (style.getBgColor() != null) {
+			cs.setFillForegroundColor(new XSSFColor(style.getBgColor()));
+			cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		}
 		
+		if (style.getFormat() != null) {
+			cs.setDataFormat(support.getDataFormat().getFormat(style.getFormat()));
+		}
 		//style.getBgColor();
 		//style.getFgColor();
 		//style.isBold();
@@ -94,6 +102,12 @@ public class StyleBuilderImpl implements StyleBuilder {
 	@Override
 	public StyleBuilder font(String font) {
 		style.setFont(font);
+		return this;
+	}
+
+	@Override
+	public StyleBuilder format(String format) {
+		style.setFormat(format);
 		return this;
 	}
 

@@ -35,4 +35,6 @@ public interface StyleBuilder {
 
 	Style apply();
 
+	StyleBuilder format(String format);
+
 }

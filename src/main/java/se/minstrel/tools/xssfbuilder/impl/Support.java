@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import se.minstrel.tools.xssfbuilder.markers.MarkerManager;
@@ -33,13 +34,19 @@ public class Support {
 	private MarkerManager markerManager;
 	private Map<Style, XSSFCellStyle> styleMap;
 	private XSSFWorkbook workbook;
+	private XSSFDataFormat dataFormat;
 
 	public Support(XSSFWorkbook workbook, MarkerManager markerManager) {
 		this.markerManager = markerManager;
 		this.workbook = workbook;
 		this.styleMap = new HashMap <Style, XSSFCellStyle> ();
+		this.dataFormat = workbook.createDataFormat();
 	}
 
+	public XSSFDataFormat getDataFormat() {
+		return dataFormat;
+	}
+	
 	public MarkerManager getMarkerManager() {
 		return markerManager;
 	}

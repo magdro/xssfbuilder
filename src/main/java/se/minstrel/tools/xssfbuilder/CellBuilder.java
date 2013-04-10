@@ -19,6 +19,8 @@
  */
 package se.minstrel.tools.xssfbuilder;
 
+import java.util.Date;
+
 import se.minstrel.tools.xssfbuilder.style.Style;
 
 public interface CellBuilder {
@@ -33,4 +35,5 @@ public interface CellBuilder {
 
 	CellBuilder mark(String tag);
 
+	CellBuilder value(Date value);
 }

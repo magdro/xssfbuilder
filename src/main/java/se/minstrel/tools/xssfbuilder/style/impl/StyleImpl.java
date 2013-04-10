@@ -27,10 +27,11 @@ public class StyleImpl implements Style {
 
 	private boolean bold = false;
 	private boolean italics = false;
-	private Color fgColor = Color.black;
-	private Color bgColor = Color.white;
+	private Color fgColor = null;
+	private Color bgColor = null;
 	private String font = "Calibri";
 	private double fontSize = 11.0;
+	private String format = null;
 
 	public boolean isBold() {
 		return bold;
@@ -80,6 +81,14 @@ public class StyleImpl implements Style {
 		this.fontSize = fontSize;
 	}
 
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -91,6 +100,7 @@ public class StyleImpl implements Style {
 		long temp;
 		temp = Double.doubleToLongBits(fontSize);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((format == null) ? 0 : format.hashCode());
 		result = prime * result + (italics ? 1231 : 1237);
 		return result;
 	}
@@ -123,6 +133,11 @@ public class StyleImpl implements Style {
 			return false;
 		if (Double.doubleToLongBits(fontSize) != Double
 				.doubleToLongBits(other.fontSize))
+			return false;
+		if (format == null) {
+			if (other.format != null)
+				return false;
+		} else if (!format.equals(other.format))
 			return false;
 		if (italics != other.italics)
 			return false;

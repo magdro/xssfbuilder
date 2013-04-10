@@ -19,6 +19,9 @@
  */
 package se.minstrel.tools.xssfbuilder.impl;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import org.apache.poi.xssf.usermodel.XSSFCell;
 
 import se.minstrel.tools.xssfbuilder.CellBuilder;
@@ -62,6 +65,12 @@ public class CellBuilderImpl implements CellBuilder {
 	public CellBuilder mark(String tag) {
 		support.getMarkerManager().mark(cell.getSheet().getSheetName(), row,
 				col, tag);
+		return this;
+	}
+
+	@Override
+	public CellBuilder value(Date value) {
+		cell.setCellValue(value);
 		return this;
 	}
 
