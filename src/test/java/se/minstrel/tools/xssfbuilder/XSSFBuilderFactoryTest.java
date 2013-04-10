@@ -22,6 +22,7 @@ package se.minstrel.tools.xssfbuilder;
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
@@ -55,6 +56,11 @@ public class XSSFBuilderFactoryTest {
 		
 		sheet.applyAreaStyle(4, 4, 0, 3, sheet.styleBuilder().italics().bgColor(Color.BLACK).fgColor(Color.YELLOW).apply());
 
+		sheet.cell(6, 0).value("Todays date").style(sheet.styleBuilder().bold().apply());
+		sheet.cell(6, 1).value(new Date()).style(sheet.styleBuilder().format("yyyy-mm-dd").apply());
+		
+		sheet.col(0).autoWidth();
+		
 		try {
 			write(xwb, "out.xlsx");
 		} catch (IOException ioe) {
