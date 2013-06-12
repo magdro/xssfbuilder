@@ -19,6 +19,7 @@
  */
 package se.minstrel.tools.xssfbuilder.impl;
 
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -122,4 +123,10 @@ public class SheetBuilderImpl implements SheetBuilder {
 	return sheet.getLastRowNum();
     }
 
+    public SheetBuilder merge(int rowStart, int rowEnd, int colStart, int colEnd) {
+	CellRangeAddress cra = new CellRangeAddress(rowStart, rowEnd, colStart,
+		colEnd);
+	sheet.addMergedRegion(cra);
+	return this;
+    }
 }

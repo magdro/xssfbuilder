@@ -44,4 +44,6 @@ public interface SheetBuilder {
     SheetBuilder autoWidth(boolean evaluateFormulas);
 
     int getLastRowNr();
+
+    SheetBuilder merge(int rowStart, int rowEnd, int colStart, int colEnd);
 }
