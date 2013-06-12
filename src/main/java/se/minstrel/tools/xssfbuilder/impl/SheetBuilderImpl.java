@@ -1,19 +1,19 @@
 /*
  * XSSFBuilder - an API making work with poi spreadsheets more time efficient.
  * (C) 2013, Magnus Drougge <magnus.drougge@gmail.com>
- * 
+ *
  * This file is part of XSSFBuilder.
- * 
+ *
  * XSSFBuilder is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * XSSFBuilder is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with XSSFBuilder.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -34,86 +34,87 @@ import se.minstrel.tools.xssfbuilder.style.impl.StyleBuilderImpl;
 
 public class SheetBuilderImpl implements SheetBuilder {
 
-	private Support support;
-	private XSSFSheet sheet;
-	
-	public SheetBuilderImpl(Support support, XSSFSheet sheet) {
-		this.sheet = sheet;
-		this.support = support;
-	}
-	
-	public RowBuilder row(int rowNr) {
-		XSSFRow row = sheet.getRow(rowNr);
-		if (row == null) {
-			row = sheet.createRow(rowNr);
-		}
-		
-		return new RowBuilderImpl(rowNr);
+    private Support support;
+    private XSSFSheet sheet;
+
+    public SheetBuilderImpl(Support support, XSSFSheet sheet) {
+	this.sheet = sheet;
+	this.support = support;
+    }
+
+    public RowBuilder row(int rowNr) {
+	XSSFRow row = sheet.getRow(rowNr);
+	if (row == null) {
+	    row = sheet.createRow(rowNr);
 	}
 
-	public ColumnBuilder col(int colNr) {
-		return new ColumnBuilderImpl(support, sheet, colNr);
+	return new RowBuilderImpl(rowNr);
+    }
+
+    public ColumnBuilder col(int colNr) {
+	return new ColumnBuilderImpl(support, sheet, colNr);
+    }
+
+    public CellBuilder cell(int rowNr, int colNr) {
+	XSSFRow row = sheet.getRow(rowNr);
+	if (row == null) {
+	    row = sheet.createRow(rowNr);
 	}
 
-	public CellBuilder cell(int rowNr, int colNr) {
-		XSSFRow row = sheet.getRow(rowNr);
-		if (row == null) {
-			row = sheet.createRow(rowNr);
-		}
-		
-		XSSFCell cell = row.getCell(colNr);
-		if (cell == null) {
-			cell = row.createCell(colNr);
-		}
-		
-		return new CellBuilderImpl(support, cell, rowNr, colNr);
+	XSSFCell cell = row.getCell(colNr);
+	if (cell == null) {
+	    cell = row.createCell(colNr);
 	}
 
-	public FormulaBuilder formula() {
-		return new FormulaBuilderImpl(support);
-	}
+	return new CellBuilderImpl(support, cell, rowNr, colNr);
+    }
 
-	public StyleBuilder styleBuilder() {
-		return new StyleBuilderImpl(support);
-	}
+    public FormulaBuilder formula() {
+	return new FormulaBuilderImpl(support);
+    }
 
-	public SheetBuilder applyAreaStyle(int rowStart, int rowEnd, int colStart,
-			int colEnd, Style style) {
-		for (int r = rowStart; r <= rowEnd; r++) {
-			for (int c = colStart; c <= colEnd; c++) {
-				cell(r, c).style(style);
-			}
-		}
-		return this;
-	}
+    public StyleBuilder styleBuilder() {
+	return new StyleBuilderImpl(support);
+    }
 
-	public SheetBuilder clearMarkers() {
-		support.getMarkerManager().unmark();
-		return this;
+    public SheetBuilder applyAreaStyle(int rowStart, int rowEnd, int colStart,
+	    int colEnd, Style style) {
+	for (int r = rowStart; r <= rowEnd; r++) {
+	    for (int c = colStart; c <= colEnd; c++) {
+		cell(r, c).style(style);
+	    }
 	}
+	return this;
+    }
 
-	@Override
-	public SheetBuilder autoWidth() {
-		return autoWidth(false);
-	}
+    public SheetBuilder clearMarkers() {
+	support.getMarkerManager().unmark();
+	return this;
+    }
 
-	@Override
-	public SheetBuilder autoWidth(boolean evaluateFormulas) {
-		if (evaluateFormulas) {
-			support.getFormulaEvaluator().clearAllCachedResultValues();
-			support.getFormulaEvaluator().evaluateAll();
-		}
-		int lastCol = 0;
-		for (int r = 0; r <= sheet.getLastRowNum(); r++) {
-			XSSFRow row = sheet.getRow(r);
-			if (row != null) {
-				lastCol = lastCol < row.getLastCellNum() ? row.getLastCellNum() : lastCol;
-			}
-		}
-		for (int c = 0; c <= lastCol; c++) {
-			col(c).autoWidth(false);
-		}
-		return this;
+    @Override
+    public SheetBuilder autoWidth() {
+	return autoWidth(false);
+    }
+
+    @Override
+    public SheetBuilder autoWidth(boolean evaluateFormulas) {
+	if (evaluateFormulas) {
+	    support.getFormulaEvaluator().clearAllCachedResultValues();
+	    support.getFormulaEvaluator().evaluateAll();
 	}
+	int lastCol = 0;
+	for (int r = 0; r <= sheet.getLastRowNum(); r++) {
+	    XSSFRow row = sheet.getRow(r);
+	    if (row != null) {
+		lastCol = lastCol < row.getLastCellNum() ? row.getLastCellNum()
+			: lastCol;
+	    }
+	}
+	for (int c = 0; c <= lastCol; c++) {
+	    col(c).autoWidth(false);
+	}
+	return this;
+    }
 
 }
