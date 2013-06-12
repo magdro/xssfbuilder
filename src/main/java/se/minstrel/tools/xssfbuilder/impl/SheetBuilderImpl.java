@@ -117,4 +117,9 @@ public class SheetBuilderImpl implements SheetBuilder {
 	return this;
     }
 
+    @Override
+    public int getLastRowNr() {
+	return sheet.getLastRowNum();
+    }
+
 }

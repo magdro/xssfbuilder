@@ -43,4 +43,5 @@ public interface SheetBuilder {
 
     SheetBuilder autoWidth(boolean evaluateFormulas);
 
+    int getLastRowNr();
 }
