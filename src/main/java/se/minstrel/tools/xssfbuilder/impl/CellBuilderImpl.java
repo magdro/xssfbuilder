@@ -43,7 +43,6 @@ public class CellBuilderImpl implements CellBuilder {
 
     private void applyDefaults() {
 	if (support.hasDefaultStyle()) {
-	    System.out.println(String.format("applying default style on (%d,%d) %s", row, col, support.getDefaultStyle()));
 	    style(support.getDefaultStyle());
 	}
     }

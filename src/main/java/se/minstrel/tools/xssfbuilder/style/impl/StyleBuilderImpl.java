@@ -129,4 +129,10 @@ public class StyleBuilderImpl implements StyleBuilder {
 	this.style.setItalics(si.isItalics());
 	return this;
     }
+
+    @Override
+    public StyleBuilder fontSize(short fontSize) {
+	style.setFontSize(fontSize);
+	return this;
+    }
 }

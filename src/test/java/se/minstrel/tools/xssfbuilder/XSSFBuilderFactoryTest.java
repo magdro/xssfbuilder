@@ -34,7 +34,7 @@ public class XSSFBuilderFactoryTest {
 	XSSFWorkbook xwb = new XSSFWorkbook();
 
 	WorkbookBuilder wb = XSSFBuilderFactory.createBuilder(xwb);
-	wb.styleBuilder().bold().makeDefault();
+	wb.styleBuilder().fontSize((short)8).makeDefault();
 
 	SheetBuilder sheet = wb.sheet("sheet1");
 

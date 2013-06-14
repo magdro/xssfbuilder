@@ -33,6 +33,8 @@ public interface StyleBuilder {
 
     StyleBuilder font(String font);
 
+    StyleBuilder fontSize(short fontSize);
+
     Style apply();
 
     StyleBuilder makeDefault();
