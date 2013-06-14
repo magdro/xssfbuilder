@@ -38,6 +38,9 @@ public class StyleBuilderImpl implements StyleBuilder {
 
     public StyleBuilderImpl(Support support) {
 	this.support = support;
+	if (this.support.hasDefaultStyle()) {
+	    base(this.support.getDefaultStyle());
+	}
     }
 
     public StyleBuilder italics() {
