@@ -19,8 +19,11 @@
  */
 package se.minstrel.tools.xssfbuilder;
 
+import se.minstrel.tools.xssfbuilder.style.StyleBuilder;
+
 public interface WorkbookBuilder {
 
     SheetBuilder sheet(String name);
+    StyleBuilder styleBuilder();
 
 }

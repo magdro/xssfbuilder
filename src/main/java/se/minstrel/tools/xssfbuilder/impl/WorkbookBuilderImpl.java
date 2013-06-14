@@ -27,6 +27,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import se.minstrel.tools.xssfbuilder.SheetBuilder;
 import se.minstrel.tools.xssfbuilder.WorkbookBuilder;
 import se.minstrel.tools.xssfbuilder.markers.MarkerManager;
+import se.minstrel.tools.xssfbuilder.style.StyleBuilder;
+import se.minstrel.tools.xssfbuilder.style.impl.StyleBuilderImpl;
 
 public class WorkbookBuilderImpl implements WorkbookBuilder {
 
@@ -57,6 +59,11 @@ public class WorkbookBuilderImpl implements WorkbookBuilder {
 		    new SheetBuilderImpl(support, workbook.createSheet(name)));
 	}
 	return sheetBuilders.get(name);
+    }
+
+    @Override
+    public StyleBuilder styleBuilder() {
+	return new StyleBuilderImpl(support);
     }
 
 }

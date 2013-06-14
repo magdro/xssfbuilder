@@ -144,4 +144,12 @@ public class StyleImpl implements Style {
 	return true;
     }
 
+    @Override
+    public String toString() {
+	return "StyleImpl [bold=" + bold + ", italics=" + italics
+		+ ", fgColor=" + fgColor + ", bgColor=" + bgColor + ", font="
+		+ font + ", fontSize=" + fontSize + ", format=" + format + "]";
+    }
+
+
 }

@@ -37,6 +37,7 @@ public class Support {
     private XSSFWorkbook workbook;
     private XSSFDataFormat dataFormat;
     private FormulaEvaluator formulaEvaluator;
+    private Style defaultStyle = null;
 
     public Support(XSSFWorkbook workbook, MarkerManager markerManager) {
 	this.markerManager = markerManager;
@@ -73,5 +74,17 @@ public class Support {
 
     public XSSFWorkbook getWorkbook() {
 	return workbook;
+    }
+
+    public boolean hasDefaultStyle() {
+	return defaultStyle != null;
+    }
+
+    public Style getDefaultStyle() {
+	return defaultStyle;
+    }
+
+    public void setDefaultStyle(Style style) {
+	defaultStyle = style;
     }
 }

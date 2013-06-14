@@ -60,6 +60,12 @@ public class StyleBuilderImpl implements StyleBuilder {
 	return this;
     }
 
+    public StyleBuilder makeDefault() {
+	Style style = apply();
+	support.setDefaultStyle(style);
+	return this;
+    }
+
     public Style apply() {
 	if (!support.hasStyle(style)) {
 	    support.setStyle(style, buildStyle());

@@ -41,19 +41,29 @@ public class CellBuilderImpl implements CellBuilder {
 	this.support = support;
     }
 
+    private void applyDefaults() {
+	if (support.hasDefaultStyle()) {
+	    System.out.println(String.format("applying default style on (%d,%d) %s", row, col, support.getDefaultStyle()));
+	    style(support.getDefaultStyle());
+	}
+    }
+
     public CellBuilder value(String value) {
 	cell.setCellValue(value);
+	applyDefaults();
 	return this;
     }
 
     public CellBuilder value(Number value) {
 	cell.setCellValue(value.doubleValue());
+	applyDefaults();
 	return this;
     }
 
     public CellBuilder formula(String formula) {
 	cell.setCellFormula(formula);
 	cell.setCellType(XSSFCell.CELL_TYPE_FORMULA);
+	applyDefaults();
 	return this;
     }
 
@@ -71,6 +81,7 @@ public class CellBuilderImpl implements CellBuilder {
     @Override
     public CellBuilder value(Date value) {
 	cell.setCellValue(value);
+	applyDefaults();
 	return this;
     }
 

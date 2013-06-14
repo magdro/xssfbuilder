@@ -34,6 +34,8 @@ public class XSSFBuilderFactoryTest {
 	XSSFWorkbook xwb = new XSSFWorkbook();
 
 	WorkbookBuilder wb = XSSFBuilderFactory.createBuilder(xwb);
+	wb.styleBuilder().bold().makeDefault();
+
 	SheetBuilder sheet = wb.sheet("sheet1");
 
 	sheet.clearMarkers();
