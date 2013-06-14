@@ -111,4 +111,16 @@ public class StyleBuilderImpl implements StyleBuilder {
 	return this;
     }
 
+    @Override
+    public StyleBuilder base(Style style) {
+	StyleImpl si = (StyleImpl) style;
+	this.style.setBgColor(si.getBgColor());
+	this.style.setBold(si.isBold());
+	this.style.setFgColor(si.getFgColor());
+	this.style.setFont(si.getFont());
+	this.style.setFontSize(si.getFontSize());
+	this.style.setFormat(si.getFormat());
+	this.style.setItalics(si.isItalics());
+	return this;
+    }
 }

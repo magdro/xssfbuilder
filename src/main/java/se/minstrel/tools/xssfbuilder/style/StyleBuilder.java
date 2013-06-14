@@ -37,4 +37,5 @@ public interface StyleBuilder {
 
     StyleBuilder format(String format);
 
+    StyleBuilder base(Style style);
 }
