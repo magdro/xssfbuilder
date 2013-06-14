@@ -72,7 +72,7 @@ public class StyleBuilderImpl implements StyleBuilder {
 
 	XSSFFont font = wb.createFont();
 	font.setFontName(style.getFont());
-	font.setFontHeight(style.getFontSize());
+	font.setFontHeightInPoints(style.getFontSize());
 	font.setBold(style.isBold());
 	font.setItalic(style.isItalics());
 	if (style.getFgColor() != null) {

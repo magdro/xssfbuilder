@@ -29,8 +29,8 @@ public class StyleImpl implements Style {
     private boolean italics = false;
     private Color fgColor = null;
     private Color bgColor = null;
-    private String font = "Calibri";
-    private double fontSize = 11.0;
+    private String font = "Arial";
+    private short fontSize = 11;
     private String format = null;
 
     public boolean isBold() {
@@ -73,11 +73,11 @@ public class StyleImpl implements Style {
 	this.font = font;
     }
 
-    public double getFontSize() {
+    public short getFontSize() {
 	return fontSize;
     }
 
-    public void setFontSize(double fontSize) {
+    public void setFontSize(short fontSize) {
 	this.fontSize = fontSize;
     }
 
